@@ -3,16 +3,20 @@ var headerName = $(HTMLheaderName);
 var headerRole = $(HTMLheaderRole);
 header.prepend(headerName);
 headerName.after(HTMLheaderRole);
-
+var HTMLContacts = [HTMLcontactGeneric, HTMLmobile, HTMLemail, HTMLtwitter, HTMLgithub, HTMLblog, HTMLlocation];
+var HTMLProjects = [HTMLprojectStart,HTMLprojectTitle,HTMLprojectDates,HTMLprojectDescription,HTMLprojectImage];
+var HTMLExperience = [HTMLworkStart, HTMLworkEmployer, HTMLworkTitle, HTMLworkDates, HTMLworkLocation, HTMLworkDescription];
+var HTMLBio = [HTMLbioPic, HTMLwelcomeMsg,HTMLskillsStart,HTMLskills];
 var topContacts = $('#topContacts');
-[HTMLcontactGeneric, HTMLmobile, HTMLemail, HTMLtwitter, HTMLgithub, HTMLblog, HTMLlocation].forEach(function(item){
+HTMLContacts.forEach(function(item){
 	topContacts.append(item);
 });
-[HTMLbioPic, HTMLwelcomeMsg,HTMLskillsStart,HTMLskills].forEach(function(item){
+HTMLBio.forEach(function(item){
 	header.append(item);
 });
 
 var workExperience = $('#workExperience');
-[HTMLworkStart, HTMLworkEmployer, HTMLworkTitle, HTMLworkDates, HTMLworkLocation, HTMLworkDescription].forEach(function(item){
+HTMLExperience.forEach(function(item){
 	workExperience.append(item)
 });
+

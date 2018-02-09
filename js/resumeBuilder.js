@@ -24,3 +24,4 @@ HTMLExperience.forEach(appendHTMLItems($('#workExperience')));
 HTMLProjects.forEach(appendHTMLItems($('#projects')));
 HTMLEducation.forEach(appendHTMLItems($('#education')));
 HTMLOnlineEducation.forEach(appendHTMLItems($('#education')));
+HTMLMap.forEach(appendHTMLItems($('#mapDiv')));

@@ -4,10 +4,11 @@ var headerRole = $(HTMLheaderRole);
 header.prepend(headerName);
 headerName.after(HTMLheaderRole);
 var HTMLContacts = [HTMLcontactGeneric, HTMLmobile, HTMLemail, HTMLtwitter, HTMLgithub, HTMLblog, HTMLlocation];
-var HTMLProjects = [HTMLprojectStart,HTMLprojectTitle,HTMLprojectDates,HTMLprojectDescription,HTMLprojectImage];
-var HTMLExperience = [HTMLworkStart, HTMLworkEmployer, HTMLworkTitle, HTMLworkDates, HTMLworkLocation, HTMLworkDescription];
 var HTMLBio = [HTMLbioPic, HTMLwelcomeMsg,HTMLskillsStart,HTMLskills];
-var HTMLEducation = [HTMLschoolStart,HTMLschoolName,HTMLschoolDegree,HTMLschoolDates,HTMLschoolLocation,HTMLschoolMajor];
+var HTMLProjects = [HTMLprojectStart,HTMLprojectTitle,HTMLprojectDates,HTMLprojectDescription,HTMLprojectImage];
+var HTMLExperience = [HTMLworkStart, HTMLworkEmployer + HTMLworkTitle, HTMLworkDates, HTMLworkLocation, HTMLworkDescription];
+var HTMLEducation = [HTMLschoolStart,HTMLschoolName + HTMLschoolDegree,HTMLschoolDates,HTMLschoolLocation,HTMLschoolMajor];
+var HTMLOnlineEducation = [HTMLonlineClasses,HTMLonlineTitle + HTMLonlineSchool,HTMLonlineDates,HTMLonlineURL];
 
 var topContacts = $('#topContacts');
 HTMLContacts.forEach(function(item){
@@ -27,3 +28,14 @@ HTMLProjects.forEach(function(item){
 	projects.append(item);
 });
 
+var education = $('#education');
+console.log(education);
+console.log(HTMLEducation);
+HTMLEducation.forEach(function(item){
+	console.log(item);
+	education.append(item);
+});
+
+HTMLOnlineEducation.forEach(function(item){
+	education.append(item);
+});

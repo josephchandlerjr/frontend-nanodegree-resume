@@ -1,41 +1,26 @@
+//build header
 var header = $('#header');
 var headerName = $(HTMLheaderName);
 var headerRole = $(HTMLheaderRole);
 header.prepend(headerName);
 headerName.after(HTMLheaderRole);
+
+//build other sections
 var HTMLContacts = [HTMLcontactGeneric, HTMLmobile, HTMLemail, HTMLtwitter, HTMLgithub, HTMLblog, HTMLlocation];
 var HTMLBio = [HTMLbioPic, HTMLwelcomeMsg,HTMLskillsStart,HTMLskills];
 var HTMLProjects = [HTMLprojectStart,HTMLprojectTitle,HTMLprojectDates,HTMLprojectDescription,HTMLprojectImage];
 var HTMLExperience = [HTMLworkStart, HTMLworkEmployer + HTMLworkTitle, HTMLworkDates, HTMLworkLocation, HTMLworkDescription];
 var HTMLEducation = [HTMLschoolStart,HTMLschoolName + HTMLschoolDegree,HTMLschoolDates,HTMLschoolLocation,HTMLschoolMajor];
 var HTMLOnlineEducation = [HTMLonlineClasses,HTMLonlineTitle + HTMLonlineSchool,HTMLonlineDates,HTMLonlineURL];
+var HTMLMap = [internationalizeButton,googleMap];
 
-var topContacts = $('#topContacts');
-HTMLContacts.forEach(function(item){
-	topContacts.append(item);
-});
-HTMLBio.forEach(function(item){
-	header.append(item);
-});
+appendHTMLItems = function(elem){ 				// takes an html element and returns a function									
+	return function(item){elem.append(item);};  // return function takes an item and appends it to the element
+}
 
-var workExperience = $('#workExperience');
-HTMLExperience.forEach(function(item){
-	workExperience.append(item)
-});
-
-var projects = $('#projects');
-HTMLProjects.forEach(function(item){
-	projects.append(item);
-});
-
-var education = $('#education');
-console.log(education);
-console.log(HTMLEducation);
-HTMLEducation.forEach(function(item){
-	console.log(item);
-	education.append(item);
-});
-
-HTMLOnlineEducation.forEach(function(item){
-	education.append(item);
-});
+HTMLContacts.forEach(appendHTMLItems($('#topContacts')));
+HTMLBio.forEach(appendHTMLItems(header));
+HTMLExperience.forEach(appendHTMLItems($('#workExperience')));
+HTMLProjects.forEach(appendHTMLItems($('#projects')));
+HTMLEducation.forEach(appendHTMLItems($('#education')));
+HTMLOnlineEducation.forEach(appendHTMLItems($('#education')));

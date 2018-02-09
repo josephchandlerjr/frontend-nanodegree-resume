@@ -9,4 +9,6 @@ contactTypes = [HTMLcontactGeneric, HTMLmobile, HTMLemail, HTMLtwitter, HTMLgith
 contactTypes.forEach(function(item){
 	topContacts.append(item);
 });
- 
+[HTMLbioPic, HTMLwelcomeMsg,HTMLskillsStart,HTMLskills].forEach(function(item){
+	header.append(item);
+});

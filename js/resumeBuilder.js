@@ -7,6 +7,8 @@ var HTMLContacts = [HTMLcontactGeneric, HTMLmobile, HTMLemail, HTMLtwitter, HTML
 var HTMLProjects = [HTMLprojectStart,HTMLprojectTitle,HTMLprojectDates,HTMLprojectDescription,HTMLprojectImage];
 var HTMLExperience = [HTMLworkStart, HTMLworkEmployer, HTMLworkTitle, HTMLworkDates, HTMLworkLocation, HTMLworkDescription];
 var HTMLBio = [HTMLbioPic, HTMLwelcomeMsg,HTMLskillsStart,HTMLskills];
+var HTMLEducation = [HTMLschoolStart,HTMLschoolName,HTMLschoolDegree,HTMLschoolDates,HTMLschoolLocation,HTMLschoolMajor];
+
 var topContacts = $('#topContacts');
 HTMLContacts.forEach(function(item){
 	topContacts.append(item);
@@ -18,5 +20,10 @@ HTMLBio.forEach(function(item){
 var workExperience = $('#workExperience');
 HTMLExperience.forEach(function(item){
 	workExperience.append(item)
+});
+
+var projects = $('#projects');
+HTMLProjects.forEach(function(item){
+	projects.append(item);
 });
 

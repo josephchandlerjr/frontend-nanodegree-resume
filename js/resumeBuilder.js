@@ -11,7 +11,12 @@ var model = {
 		welcomeMessage: 'Hello, fellow humans!', 
 		skills: ['coding','troubleshooting','other such stuff'],
 		biopic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp-u46WdmwHcqdSqJ1Z030m68SVGHE-toGZfpxkSZvqBUXYsKb',
-		display: function(){console.log('bio display'); }
+		getName: function(){return this.name;},
+		getRole: function(){return this.role;},
+		getContacts: function(){return this.contacts;},
+		getWelcomeMessage: function(){return this.welcomeMessage;},
+		getSkills: function(){return this.skills;},
+		getBiopic: function(){return this.biopic;},
 	},
 
 	education : {
@@ -42,7 +47,9 @@ var model = {
 				dates: 'something - something',
 				url: 'http://udacity.com'
 			}
-		]
+		],
+		getSchools: function(){return this.schools;},
+		getOnlineCourses: function(){this.onlineCourses;}
 	},
 
 	work : {
@@ -61,7 +68,8 @@ var model = {
 				dates: 'July 2014 – June 2015',
 				description: 'Led, assessed and trained 33 Financial Literacy Advisors based throughout the U.S.' 
 			}
-		]
+		],
+		getJobs: function(){return this.jobs;}
 	},
 
 	projects : { 
@@ -78,11 +86,20 @@ var model = {
 				description: 'This is a super-duper cool project',
 				images: ['url 1', 'url 2',]
 			},
-		]
+		],
+		getProjects: function(){return this.projects;}
 	}
 
 };
 
+var control = {
+	getName: function(){return model.bio.name;},
+	getRole: function(){return model.bio.role;},
+	getContacts: function(){return model.bio.contacts;},
+	getWelcomeMessage: function(){return model.bio.welcomeMessage;},
+	getSkills: function(){return model.bio.skills;},
+	getBiopic: function(){return model.bio.biopic;},
+};
 //build header
 var FormattedheaderName = HTMLheaderName.replace('%data%',model.bio.name);
 var FormattedheaderRole = HTMLheaderRole.replace('%data%',model.bio.role);

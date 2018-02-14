@@ -42,8 +42,7 @@ var model = {
 				dates: 'something - something',
 				url: 'http://udacity.com'
 			}
-		],
-		display: function (){console.log('education display');}
+		]
 	},
 
 	work : {
@@ -62,8 +61,7 @@ var model = {
 				dates: 'July 2014 – June 2015',
 				description: 'Led, assessed and trained 33 Financial Literacy Advisors based throughout the U.S.' 
 			}
-		],
-	  display: function(){console.log('work display');}
+		]
 	},
 
 	projects : { 
@@ -77,29 +75,44 @@ var model = {
 			{	
 				title: 'project 2' ,
 				dates: 'sometime - sometime',
-				description: 'This is a super-dupercool project',
+				description: 'This is a super-duper cool project',
 				images: ['url 1', 'url 2',]
 			},
-		],
-		display: function(){console.log('projects display');}
+		]
 	}
 
 };
 
+//build header
 var FormattedheaderName = HTMLheaderName.replace('%data%',model.bio.name);
 var FormattedheaderRole = HTMLheaderRole.replace('%data%',model.bio.role);
+var header = $('#header');
+var headerName = $(FormattedheaderName);
+var headerRole = $(FormattedheaderRole);
+header.prepend(headerName);
+headerName.after(FormattedheaderRole);
+
+// build contacts
 var Formattedmobile = HTMLmobile.replace('%data%',model.bio.contacts.mobile);
 var Formattedemail = HTMLemail.replace('%data%',model.bio.contacts.email);
 var Formattedgithub = HTMLgithub.replace('%data%',model.bio.contacts.github);
 var Formattedlocation = HTMLlocation.replace('%data%',model.bio.contacts.location);
+var FormattedContacts = [Formattedmobile, Formattedemail, Formattedgithub, Formattedlocation];
+FormattedContacts.forEach(appendFormattedItems($('#topContacts')));
 
+//build bio
 var FormattedbioPic =  HTMLbioPic.replace('%data%',model.bio.biopic);
 var FormattedwelcomeMsg = HTMLwelcomeMsg.replace('%data%',model.bio.welcomeMessage);
+var FormattedBio = [FormattedbioPic, FormattedwelcomeMsg,FormattedskillsStart];
+FormattedBio.forEach(appendFormattedItems(header));
 
+//build skills
 var FormattedskillsStart = HTMLskillsStart.replace('%data%','%data%');
 var Formattedskills = model.bio.skills.map(function(item){ return HTMLskills.replace('%data%',item);});
+Formattedskills.forEach(appendFormattedItems($('#skills')));
 
-var FormattedworkStart = HTMLworkStart;
+
+//build jobs
 var Formattedjobs = [];
 model.work.jobs.forEach(function(obj){
 	var workStart = $(HTMLworkStart);
@@ -109,18 +122,23 @@ model.work.jobs.forEach(function(obj){
 	workStart.append(HTMLworkDescription.replace('%data%',obj.description));
 	Formattedjobs.push(workStart);
 	});
+Formattedjobs.forEach(appendFormattedItems($('#workExperience')));
 
-
+//build projects
 var Formattedprojects = [];
 model.projects.projects.forEach(function(obj){
 	var projectStart = $(HTMLprojectStart);
-	projectStart.append(HTMLprojectTitle.replace('%data%','%data%'));
-	projectStart.append(HTMLprojectDates.replace('%data%','%data%'));
-	projectStart.append(HTMLprojectDescription.replace('%data%','%data%'));
-	projectStart.append(HTMLprojectImage.replace('%data%','%data%'));
+	projectStart.append(HTMLprojectTitle.replace('%data%',obj.title));
+	projectStart.append(HTMLprojectDates.replace('%data%',obj.dates));
+	projectStart.append(HTMLprojectDescription.replace('%data%',obj.description));
+	obj.images.forEach(function(img){
+		projectStart.append(HTMLprojectImage.replace('%data%',img));
+	});
 	Formattedprojects.push(projectStart);
 });
+Formattedprojects.forEach(appendFormattedItems($('#projects')));
 
+// build schools
 var Formattedschools = [];
 model.education.schools.forEach(function(obj){
 	var schoolStart = $(HTMLschoolStart); 
@@ -132,9 +150,10 @@ model.education.schools.forEach(function(obj){
 
 	Formattedschools.push(schoolStart);
 });
+Formattedschools.forEach(appendFormattedItems($('#education')));
 
+//build online schools
 var Formattedonlineschools = [];
-
 model.education.onlineCourses.forEach(function(obj){
 	var onlineStart = $(HTMLonlineClasses);
 	onlineStart.append(HTMLonlineTitle.replace('%data%',obj.title) + HTMLonlineSchool.replace('%data%',obj.school));
@@ -143,38 +162,15 @@ model.education.onlineCourses.forEach(function(obj){
 
 	Formattedonlineschools.push(onlineStart);
 });
+Formattedonlineschools.forEach(appendFormattedItems($('#education')));
 
-var FormattedonlineClasses = HTMLonlineClasses.replace('%data%','%data%');
-var FormattedonlineTitle = HTMLonlineTitle.replace('%data%','%data%');
-var FormattedonlineSchool = HTMLonlineSchool.replace('%data%','%data%');
-var FormattedonlineDates = HTMLonlineDates.replace('%data%','%data%');
-var FormattedonlineURL = HTMLonlineURL.replace('%data%','%data%');
 
-//build header
-var header = $('#header');
-var headerName = $(FormattedheaderName);
-var headerRole = $(FormattedheaderRole);
-header.prepend(headerName);
-headerName.after(FormattedheaderRole);
 
-//build other sections
-var FormattedContacts = [Formattedmobile, Formattedemail, Formattedgithub, Formattedlocation];
-var FormattedBio = [FormattedbioPic, FormattedwelcomeMsg,FormattedskillsStart];
 
-//var FormattedEducation = [FormattedschoolStart,FormattedschoolName + FormattedschoolDegree,FormattedschoolDates,FormattedschoolLocation,FormattedschoolMajor];
-var FormattedOnlineEducation = [FormattedonlineClasses,FormattedonlineTitle + FormattedonlineSchool,FormattedonlineDates,FormattedonlineURL];
 var FormattedMap = [internationalizeButton,googleMap];
 
-appendFormattedItems = function(elem){ 				// takes an Formatted element and returns a function									
+function appendFormattedItems(elem){ 				// takes an Formatted element and returns a function									
 	return function(item){elem.append(item);};  // return function takes an item and appends it to the element
 }
 
-FormattedContacts.forEach(appendFormattedItems($('#topContacts')));
-FormattedBio.forEach(appendFormattedItems(header));
-Formattedskills.forEach(appendFormattedItems($('#skills')));
-Formattedjobs.forEach(appendFormattedItems($('#workExperience')));
-Formattedprojects.forEach(appendFormattedItems($('#projects')));
-//FormattedEducation.forEach(appendFormattedItems($('#education')));
-Formattedschools.forEach(appendFormattedItems($('#education')));
-Formattedonlineschools.forEach(appendFormattedItems($('#education')));
 FormattedMap.forEach(appendFormattedItems($('#mapDiv')));
